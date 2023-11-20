@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');
+Route::get('/login', [HomeController::class, 'login']);
+Route::get('/register', [HomeController::class, 'register']);
+Route::get('/siswa', [HomeController::class, 'data_siswa'])->name('DataSiswa');
+Route::get('/tambah_siswa', [HomeController::class, 'tambah_siswa'])->name('TambahDataSiswa');
