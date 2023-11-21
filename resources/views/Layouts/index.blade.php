@@ -230,23 +230,32 @@
                         <!-- Master Data -->
                         <li class="nav-header">MASTER DATA</li>
                         <li class="nav-item">
-                            <a href="{{ Route('DataSiswa') }}" class="nav-link {{ Route::is('DataSiswa') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>Siswa</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ Route('TambahDataSiswa') }}" class="nav-link {{ Route::is('TambahDataSiswa') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user-plus"></i>
-                                <p>Tambah Siswa</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-plus"></i>
-                                <p>Tambah Kelas</p>
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>Master Data</p>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
-                        </li>    
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ Route('DataSiswa') }}" class="nav-link {{ Route::is('DataSiswa') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>Siswa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('TambahDataSiswa') }}" class="nav-link {{ Route::is('TambahDataSiswa') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user-plus"></i>
+                                        <p>Tambah Siswa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('TambahKelas') }}" class="nav-link {{ Route::is('TambahKelas') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-plus"></i>
+                                        <p>Tambah Kelas</p>
+                                    </a>
+                                </li>   
+                            </ul>
+                        </li> 
                         <!-- End of Master Data -->
                         <!-- Fitur -->
                         <li class="nav-header">FITUR</li>
@@ -303,6 +312,7 @@
             @yield('Dashboard')
             @yield('DataSiswa')
             @yield('TambahSiswa')
+            @yield('TambahKelas')
             <!-- End of Main content -->
         </div>
 

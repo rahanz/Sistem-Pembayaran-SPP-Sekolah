@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/user', [HomeController::class, 'user'])->name('HalamanUser');
 Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');
 Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);
 Route::get('/siswa', [HomeController::class, 'data_siswa'])->name('DataSiswa');
 Route::get('/tambah_siswa', [HomeController::class, 'tambah_siswa'])->name('TambahDataSiswa');
+Route::get('/tambah_kelas', [HomeController::class, 'tambah_kelas'])->name('TambahKelas');

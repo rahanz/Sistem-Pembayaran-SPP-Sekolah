@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function user(){
+        return view('Layouts.userindex');
+    }
+
     public function dashboard(){
         return view('SuperAdmin.dashboard');
     }
@@ -26,7 +30,7 @@ class HomeController extends Controller
         return view('SuperAdmin.tambahsiswa');
     }
 
-    public function data_kelas(){
-        return view('SuperAdmin.tambahsiswa');
+    public function tambah_kelas(){
+        return view('SuperAdmin.tambahkelas');
     }
 }
