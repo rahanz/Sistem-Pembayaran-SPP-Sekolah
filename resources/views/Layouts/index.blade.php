@@ -230,7 +230,7 @@
                         <!-- Master Data -->
                         <li class="nav-header">MASTER DATA</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link {{ Route::is('DataSiswa','TambahDataSiswa','TambahKelas') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>Master Data</p>
                                 <i class="right fas fa-angle-left"></i>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function user(){
-        return view('Layouts.userindex');
+        return view('User.pembayaran');
     }
 
     public function dashboard(){
