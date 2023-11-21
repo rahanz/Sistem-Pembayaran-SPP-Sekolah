@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function user(){
-        return view('User.pembayaran');
+        return view('User.dashboard');
+    }
+
+    public function user_profile(){
+        return view('User.profile');
     }
 
     public function dashboard(){

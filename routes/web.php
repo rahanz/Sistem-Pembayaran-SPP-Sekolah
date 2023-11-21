@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', [HomeController::class, 'user'])->name('HalamanUser');
+Route::get('/user_setting', [HomeController::class, 'user_profile'])->name('HalamanUserSetting');
 Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');
 Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);

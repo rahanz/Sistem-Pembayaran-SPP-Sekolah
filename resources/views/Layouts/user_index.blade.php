@@ -239,9 +239,9 @@
                         <!-- Akun -->
                         <li class="nav-header">AKUN</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ Route('HalamanUserSetting') }}" class="nav-link {{ Route::is('HalamanUserSetting') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-cogs"></i>
-                                <p>Pengaturan</p>
+                                <p>Setting</p>
                             </a>
                         </li>
                         <!-- End of Akun -->
@@ -274,6 +274,7 @@
 
             <!-- Main content -->
             @yield('DashboardSiswa')
+            @yield('AkunSetting')
             <!-- End of Main content -->
         </div>
 
