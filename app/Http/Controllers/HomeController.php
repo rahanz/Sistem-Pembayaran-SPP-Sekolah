@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,11 +28,27 @@ class HomeController extends Controller
     }
 
     public function data_siswa(){
-        return view('SuperAdmin.siswa');
+        $dataKelas = Kelas::pluck('kelas')->unique();
+        $dataJurusan = Kelas::pluck('jurusan')->unique();
+
+        $dataKelas = $dataKelas->sort();
+        $dataJurusan = $dataJurusan->sort();
+
+        return view('SuperAdmin.siswa', compact('dataKelas','dataJurusan'));
     }
 
     public function tambah_siswa(){
-        return view('SuperAdmin.tambahsiswa');
+        $dataKelas = Kelas::pluck('kelas')->unique();
+        $dataJurusan = kelas::pluck('jurusan')->unique();
+
+        $dataKelas = $dataKelas->sort();
+        $dataJurusan = $dataJurusan->sort();
+
+        return view('SuperAdmin.tambahsiswa', compact('dataKelas','dataJurusan'));
+    }
+
+    public function kelas(){
+        return view('SuperAdmin.kelas');
     }
 
     public function tambah_kelas(){

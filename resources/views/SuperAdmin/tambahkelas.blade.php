@@ -7,40 +7,34 @@
     <section class="content">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Tambah Gedung Kelas Baru</h3>
+                <h3 class="card-title">Tambah Ruang Kelas</h3>
             </div>
-            <form>
+            <form action="{{ Route('InputTambahKelas') }}" method="POST">
+                @csrf
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Kelas</label>
-                        <select class="form-control">
-                            <option>Kelas X</option>
-                            <option>Kelas XI</option>
-                            <option>Kelas XII</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Jurusan</label>
-                        <select class="form-control">
-                            <option>IPA</option>
-                            <option>IPS</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Ruang</label>
-                        <input type="number" class="form-control" placeholder="Nomor kelas, IPA 1, IPS 1">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Kelas -->
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Wali Kelas</label>
+                                <input type="text" class="form-control" name="wali_kelas_siswa">
+                            </div>
+                        </div>
+                        <!-- Jurusan -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Kelas</label>
+                                <input type="text" class="form-control" placeholder="Contoh : X IPA 1, X IPS 1" name="ruang_kelas_siswa">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
     </section>
+
 @endsection

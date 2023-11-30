@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- DataTables -->
+    @yield('DataTableLink')
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
@@ -28,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+    @yield('StyleHalamanSiswa')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -105,8 +108,7 @@
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
-                                        <span class="float-right text-sm text-muted"><i
-                                                class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">I got your message bro</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -221,7 +223,8 @@
                         <!-- Dashboard -->
                         <li class="nav-header">DASHBOARD</li>
                         <li class="nav-item">
-                            <a href="{{ Route('HalamanDashboard') }}" class="nav-link {{ Route::is('HalamanDashboard') ? 'active' : '' }}">
+                            <a href="{{ Route('HalamanDashboard') }}"
+                                class="nav-link {{ Route::is('HalamanDashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -229,33 +232,45 @@
                         <!-- End of Dashboard -->
                         <!-- Master Data -->
                         <li class="nav-header">MASTER DATA</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link {{ Route::is('DataSiswa','TambahDataSiswa','TambahKelas') ? 'active' : '' }}">
+                        <li
+                            class="nav-item {{ Route::is('DataSiswa', 'TambahDataSiswa', 'HalamanTabelKelas', 'TambahKelas') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link {{ Route::is('DataSiswa', 'TambahDataSiswa', 'HalamanTabelKelas', 'TambahKelas') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>Master Data</p>
                                 <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ Route('DataSiswa') }}" class="nav-link {{ Route::is('DataSiswa') ? 'active' : '' }}">
+                                    <a href="{{ Route('DataSiswa') }}"
+                                        class="nav-link {{ Route::is('DataSiswa') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>Siswa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ Route('TambahDataSiswa') }}" class="nav-link {{ Route::is('TambahDataSiswa') ? 'active' : '' }}">
+                                    <a href="{{ Route('TambahDataSiswa') }}"
+                                        class="nav-link {{ Route::is('TambahDataSiswa') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user-plus"></i>
                                         <p>Tambah Siswa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ Route('TambahKelas') }}" class="nav-link {{ Route::is('TambahKelas') ? 'active' : '' }}">
+                                    <a href="{{ Route('HalamanTabelKelas') }}"
+                                        class="nav-link {{ Route::is('HalamanTabelKelas') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>Kelas</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('TambahKelas') }}"
+                                        class="nav-link {{ Route::is('TambahKelas') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-plus"></i>
                                         <p>Tambah Kelas</p>
                                     </a>
-                                </li>   
+                                </li>
                             </ul>
-                        </li> 
+                        </li>
                         <!-- End of Master Data -->
                         <!-- Fitur -->
                         <li class="nav-header">FITUR</li>
@@ -309,9 +324,11 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
+            @include('Pesan.pesan')
             @yield('Dashboard')
             @yield('DataSiswa')
             @yield('TambahSiswa')
+            @yield('DataKelas')
             @yield('TambahKelas')
             <!-- End of Main content -->
         </div>
@@ -343,6 +360,8 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->
+    @yield('DataTableScript')
     <!-- ChartJS -->
     <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
     <!-- Sparkline -->
@@ -363,6 +382,15 @@
     <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
+    @yield('DataTableScriptSpecific')
+    @yield('ScriptHalamanSiswa')
+    <script>
+        $(document).ready(function() {
+            $(".alert").fadeTo(3000, 500).slideUp(500, function() {
+                $(".alert").slideUp(500);
+            });
+        });
+    </script>
 </body>
 
 </html>
