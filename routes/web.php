@@ -19,6 +19,7 @@ Route::get('/user_setting', [HomeController::class, 'user_profile'])->name('Hala
 Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');
 Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);
+// data siswa
 Route::get('/siswa', [HomeController::class, 'data_siswa'])->name('DataSiswa');
 // tambah siswa
 Route::get('/tambah_siswa', [HomeController::class, 'tambah_siswa'])->name('TambahDataSiswa');

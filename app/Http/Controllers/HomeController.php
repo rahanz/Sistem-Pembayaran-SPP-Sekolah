@@ -28,13 +28,7 @@ class HomeController extends Controller
     }
 
     public function data_siswa(){
-        $dataKelas = Kelas::pluck('kelas')->unique();
-        $dataJurusan = Kelas::pluck('jurusan')->unique();
-
-        $dataKelas = $dataKelas->sort();
-        $dataJurusan = $dataJurusan->sort();
-
-        return view('SuperAdmin.siswa', compact('dataKelas','dataJurusan'));
+        return view('SuperAdmin.siswa');
     }
 
     public function tambah_siswa(){

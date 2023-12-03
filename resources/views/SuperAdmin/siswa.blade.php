@@ -18,18 +18,7 @@
                             <label for="exampleInputEmail1">Kelas</label>
                             <select class="form-control" name="KategoriKelas">
                                 <option value="">-- Pilih Kelas --</option>
-                                @foreach ($dataKelas as $kelas)
-                                    <option value="{{ $kelas }}">{{ $kelas }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Jurusan</label>
-                            <select class="form-control" name="KategoriJurusan">
-                                <option value="">-- Jurusan --</option>
-                                @foreach ($dataJurusan as $jurusan_kelas)
-                                    <option value="{{ $jurusan_kelas }}">{{ $jurusan_kelas }}</option>
-                                @endforeach
+                                <option value=""></option>
                             </select>
                         </div>
                     </div>

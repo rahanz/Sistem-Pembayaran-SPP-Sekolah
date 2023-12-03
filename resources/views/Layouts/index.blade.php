@@ -20,8 +20,6 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/jqvmap/jqvmap.min.css') }}">
-    <!-- DataTables -->
-    @yield('DataTableLink')
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
@@ -235,7 +233,7 @@
                         <li
                             class="nav-item {{ Route::is('DataSiswa', 'TambahDataSiswa', 'HalamanTabelKelas', 'TambahKelas') ? 'menu-open' : '' }}">
                             <a href="#"
-                                class="nav-link {{ Route::is('DataSiswa', 'TambahDataSiswa', 'HalamanTabelKelas', 'TambahKelas') ? 'active' : '' }}">
+                                class="nav-link {{ Route::is('DataSiswa', 'TambahDataSiswa', 'TambahKelas') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>Master Data</p>
                                 <i class="right fas fa-angle-left"></i>
@@ -256,16 +254,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ Route('HalamanTabelKelas') }}"
-                                        class="nav-link {{ Route::is('HalamanTabelKelas') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-user"></i>
-                                        <p>Kelas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="{{ Route('TambahKelas') }}"
                                         class="nav-link {{ Route::is('TambahKelas') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-plus"></i>
+                                        <i class="nav-icon fas fa-chalkboard"></i>
                                         <p>Tambah Kelas</p>
                                     </a>
                                 </li>
@@ -328,7 +319,6 @@
             @yield('Dashboard')
             @yield('DataSiswa')
             @yield('TambahSiswa')
-            @yield('DataKelas')
             @yield('TambahKelas')
             <!-- End of Main content -->
         </div>
@@ -382,11 +372,10 @@
     <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
-    @yield('DataTableScriptSpecific')
     @yield('ScriptHalamanSiswa')
     <script>
         $(document).ready(function() {
-            $(".alert").fadeTo(3000, 500).slideUp(500, function() {
+            $(".alert").fadeTo(10000, 500).slideUp(500, function() {
                 $(".alert").slideUp(500);
             });
         });

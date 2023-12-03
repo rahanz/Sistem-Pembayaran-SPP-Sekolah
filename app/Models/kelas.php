@@ -13,9 +13,4 @@ class Kelas extends Model
         'wali_kelas',
         'ruang_kelas',
     ];
-
-    public function siswa()
-    {
-        return $this->hasMany(Siswa::class);
-    }
 }
