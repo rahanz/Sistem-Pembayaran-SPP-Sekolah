@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
             $table->string('nis')->unique();
-            $table->string('nama_siswa');
+            $table->string('nama');
             $table->string('jenis_kelamin')->default(null);
-            $table->string('alamat');
-            $table->unsignedBigInteger('kelas_id'); // Kolom baru
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->text('alamat');
             $table->timestamps();
-
-            $table->foreign('kelas_id')->references('id')->on('kelas'); // Menambahkan foreign key
         });
     }
 

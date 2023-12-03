@@ -11,10 +11,10 @@ class siswa extends Model
     protected $fillable =
     [
         'nis',
-        'nama_siswa',
+        'nama',
         'jenis_kelamin',
+        'kelas_id',
         'alamat',
-        'kelas_id'
     ];
 
     public function kelas()

@@ -20,8 +20,9 @@ Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');
 Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);
 Route::get('/siswa', [HomeController::class, 'data_siswa'])->name('DataSiswa');
-Route::get('/get-jurusan/{kelas}', [InputController::class, 'getJurusanOptions']);
+// tambah siswa
 Route::get('/tambah_siswa', [HomeController::class, 'tambah_siswa'])->name('TambahDataSiswa');
-Route::get('/kelas', [HomeController::class, 'kelas'])->name('HalamanTabelKelas');
+Route::post('/tambah_siswa', [InputController::class, 'input_siswa'])->name('InputSiswa');
+// tambah kelas
 Route::get('/tambah_kelas', [HomeController::class, 'tambah_kelas'])->name('TambahKelas');
 Route::post('/tambah_kelas', [InputController::class, 'input_kelas'])->name('InputTambahKelas');

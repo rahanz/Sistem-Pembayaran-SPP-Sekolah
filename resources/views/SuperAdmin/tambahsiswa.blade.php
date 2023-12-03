@@ -11,7 +11,8 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form>
+                <form action="{{ Route('InputSiswa') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-12">
                             <!-- text input for Nim -->
@@ -40,20 +41,10 @@
                             <!-- Kelas -->
                             <div class="form-group">
                                 <label>Kelas</label>
-                                <select class="form-control">
+                                <select class="form-control" name="kelas_id">
                                     <option value="">-- Pilih Kelas --</option>
                                     @foreach ($dataKelas as $kelas)
-                                        <option value="{{ $kelas }}">{{ $kelas }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- Jurusan -->
-                            <div class="form-group">
-                                <label>Jurusan</label>
-                                <select class="form-control">
-                                    <option value="">-- Pilih Jurusan --</option>
-                                    @foreach ($dataJurusan as $jurusan)
-                                        <option value="{{ $jurusan }}">{{ $jurusan }}</option>
+                                        <option value="{{ $kelas->id }}">{{ $kelas->ruang_kelas }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,12 +56,12 @@
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            </form>
         </div>
     </section>
 @endsection
