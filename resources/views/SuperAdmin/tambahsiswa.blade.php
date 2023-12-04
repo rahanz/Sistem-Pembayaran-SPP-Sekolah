@@ -18,7 +18,7 @@
                             <!-- text input for Nim -->
                             <div class="form-group">
                                 <label>Nis</label>
-                                <input type="text" class="form-control" name="nis_siswa" placeholder="Nomor Induk Siswa">
+                                <input type="number" class="form-control" name="nis_siswa" placeholder="Nomor Induk Siswa">
                             </div>
                         </div>
                         <div class="col-sm-6">

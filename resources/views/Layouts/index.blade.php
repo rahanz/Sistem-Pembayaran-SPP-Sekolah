@@ -231,9 +231,9 @@
                         <!-- Master Data -->
                         <li class="nav-header">MASTER DATA</li>
                         <li
-                            class="nav-item {{ Route::is('DataSiswa', 'TambahDataSiswa', 'HalamanTabelKelas', 'TambahKelas') ? 'menu-open' : '' }}">
+                            class="nav-item {{ Route::is('DataSiswa', 'TampilTabel', 'TambahDataSiswa', 'TambahKelas') ? 'menu-open' : '' }}">
                             <a href="#"
-                                class="nav-link {{ Route::is('DataSiswa', 'TambahDataSiswa', 'TambahKelas') ? 'active' : '' }}">
+                                class="nav-link {{ Route::is('DataSiswa', 'TampilTabel','TambahDataSiswa', 'TambahKelas') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>Master Data</p>
                                 <i class="right fas fa-angle-left"></i>
@@ -241,7 +241,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ Route('DataSiswa') }}"
-                                        class="nav-link {{ Route::is('DataSiswa') ? 'active' : '' }}">
+                                        class="nav-link {{ Route::is('DataSiswa','TampilTabel') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>Siswa</p>
                                     </a>

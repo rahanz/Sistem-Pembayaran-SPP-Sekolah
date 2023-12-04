@@ -21,6 +21,7 @@ Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);
 // data siswa
 Route::get('/siswa', [HomeController::class, 'data_siswa'])->name('DataSiswa');
+Route::post('/siswa', [InputController::class, 'data_siswa'])->name('TampilTabel');
 // tambah siswa
 Route::get('/tambah_siswa', [HomeController::class, 'tambah_siswa'])->name('TambahDataSiswa');
 Route::post('/tambah_siswa', [InputController::class, 'input_siswa'])->name('InputSiswa');

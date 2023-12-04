@@ -7,40 +7,50 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function user(){
+    public function user()
+    {
         return view('User.dashboard');
     }
 
-    public function user_profile(){
+    public function user_profile()
+    {
         return view('User.profile');
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('SuperAdmin.dashboard');
     }
 
-    public function login(){
+    public function login()
+    {
         return view('Akun.login');
     }
 
-    public function register(){
+    public function register()
+    {
         return view('Akun.register');
     }
-
-    public function data_siswa(){
-        return view('SuperAdmin.siswa');
+    // halaman data tabel siswa
+    public function data_siswa()
+    {
+        $dataRuangKelas = Kelas::all();
+        return view('SuperAdmin.siswa', compact('dataRuangKelas'));
     }
 
-    public function tambah_siswa(){
+    public function tambah_siswa()
+    {
         $dataKelas = Kelas::all();
         return view('SuperAdmin.tambahsiswa', compact('dataKelas'));
     }
 
-    public function kelas(){
+    public function kelas()
+    {
         return view('SuperAdmin.kelas');
     }
 
-    public function tambah_kelas(){
+    public function tambah_kelas()
+    {
         $data_kelas = kelas::all();
         return view('SuperAdmin.tambahkelas', compact('data_kelas'));
     }

@@ -27,12 +27,12 @@ class InputController extends Controller
                 'ruang_kelas_siswa.required' => 'ruang kelas tidak boleh kosong'
             ]
         );
-    
+
         Kelas::create([
             'wali_kelas' => $request->input('wali_kelas_siswa'),
             'ruang_kelas' => $request->input('ruang_kelas_siswa'),
         ]);
-    
+
         return redirect()->route('TambahKelas')->with('success', 'Data ruang kelas berhasil ditambahkan.');
     }
     // handling database untuk halaman tambah_siswa
@@ -40,7 +40,7 @@ class InputController extends Controller
     {
         $request->validate(
             [
-                'nis_siswa' => 'required|unique:siswa,nis',
+                'nis_siswa' => 'required|numeric|unique:siswa,nis',
                 'nama_siswa' => 'required',
                 'jenis_kelamin_siswa' => 'required',
                 'kelas_id' => 'required|exists:kelas,id',
@@ -49,13 +49,14 @@ class InputController extends Controller
             [
                 'nis_siswa.required' => 'nis tidak boleh kosong',
                 'nis_siswa.unique' => 'nis sudah ada dalam database',
+                'nis_siswa.numeric' => 'nis harus berupa angka',
                 'nama_siswa.required' => 'nama siswa tidak boleh kosong',
                 'jenis_kelamin_siswa.required' => 'jenis kelamin siswa tidak boleh kosong',
                 'kelas_id.required' => 'kelas tidak boleh kosong',
                 'alamat_siswa.required' => 'alamat siswa tidak boleh kosong'
             ]
         );
-    
+
         Siswa::create([
             'nis' => $request->input('nis_siswa'),
             'nama' => $request->input('nama_siswa'),
@@ -63,7 +64,16 @@ class InputController extends Controller
             'kelas_id' => $request->input('kelas_id'),
             'alamat' => $request->input('alamat_siswa'),
         ]);
-    
+
         return redirect()->route('TambahDataSiswa')->with('success', 'Data siswa berhasil ditambahkan.');
+    }
+
+    public function data_siswa(Request $request)
+    {
+        $kelas_id = $request->input('kelas_siswa');
+        $siswa = Siswa::where('kelas_id', $kelas_id)->get();
+        $kelasDipilih = Kelas::find($kelas_id);
+        $dataRuangKelas = Kelas::all(); // tambahkan baris ini
+        return view('SuperAdmin.siswa', compact('siswa', 'dataRuangKelas', 'kelasDipilih')); // tambahkan 'dataRuangKelas' ke compact
     }
 }
