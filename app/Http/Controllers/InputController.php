@@ -35,6 +35,29 @@ class InputController extends Controller
 
         return redirect()->route('TambahKelas')->with('success', 'Data ruang kelas berhasil ditambahkan.');
     }
+
+    public function edit_kelas(Request $request, $id)
+    {
+        $dataKelas = kelas::find($id);
+        $request->validate
+        ([
+            'wali_kelas_siswa' => 'required|unique:kelas,wali_kelas',
+            'ruang_kelas_siswa' => 'required|unique:kelas,ruang_kelas'
+        ],
+        [
+            'wali_kelas_siswa.required' => 'Wali kelas tidak boleh kosong',
+            'wali_kelas_siswa.unique' => 'data wali kelas sudah ada',
+            'ruang_kelas_siswa.unique' => 'ruang kelas sudah punya Wali kelas',
+            'ruang_kelas_siswa.required' => 'ruang kelas tidak boleh kosong'
+        ]);
+
+        $dataKelas->wali_kelas = $request->input('wali_kelas_siswa');
+        $dataKelas->ruang_kelas = $request->input('ruang_kelas_siswa');
+        $dataKelas->save();
+
+        // Redirect kembali ke halaman sebelumnya dengan pesan sukses
+        return redirect()->route('TambahKelas')->with('success', 'Data kelas berhasil diupdate.');
+    }
     // handling database untuk halaman tambah_siswa
     public function input_siswa(Request $request)
     {

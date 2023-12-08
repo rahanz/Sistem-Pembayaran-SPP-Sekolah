@@ -28,3 +28,4 @@ Route::post('/tambah_siswa', [InputController::class, 'input_siswa'])->name('Inp
 // tambah kelas
 Route::get('/tambah_kelas', [HomeController::class, 'tambah_kelas'])->name('TambahKelas');
 Route::post('/tambah_kelas', [InputController::class, 'input_kelas'])->name('InputTambahKelas');
+Route::put('/edit_kelas/{id}', [InputController::class, 'edit_kelas'])->name('EditKelas');
