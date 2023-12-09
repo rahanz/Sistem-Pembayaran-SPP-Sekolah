@@ -75,8 +75,7 @@
                                             <td></td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="#" class="btn btn-warning btn-sm mr-3"
-                                                        data-toggle="modal"
+                                                    <a href="#" class="btn btn-warning btn-sm mr-3" data-toggle="modal"
                                                         data-target="#editKelasModal{{ $kelas->id }}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -102,40 +101,42 @@
     </section>
 
     <!-- Modal Edit Kelas -->
-    <div class="modal fade" id="editKelasModal{{ $kelas->id }}" tabindex="-1" role="dialog"
-        aria-labelledby="editKelasModalLabel{{ $kelas->id }}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editKelasModalLabel{{ $kelas->id }}">Edit Kelas</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+    @foreach ($data_kelas as $kelas)
+        <div class="modal fade" id="editKelasModal{{ $kelas->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editKelasModalLabel{{ $kelas->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editKelasModalLabel{{ $kelas->id }}">Edit Kelas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="{{ Route('EditKelas', $kelas->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <!-- Form Edit -->
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Wali Kelas</label>
+                                <input type="text" class="form-control" name="wali_kelas_siswa"
+                                    value="{{ $kelas->wali_kelas }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Kelas</label>
+                                <input type="text" class="form-control" placeholder="Contoh : X IPA 1, X IPS 1"
+                                    name="ruang_kelas_siswa" value="{{ $kelas->ruang_kelas }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ Route('EditKelas', $kelas->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <!-- Form Edit -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Wali Kelas</label>
-                            <input type="text" class="form-control" name="wali_kelas_siswa"
-                                value="{{ $kelas->wali_kelas }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Kelas</label>
-                            <input type="text" class="form-control" placeholder="Contoh : X IPA 1, X IPS 1"
-                                name="ruang_kelas_siswa" value="{{ $kelas->ruang_kelas }}">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endforeach
 
 
 @endsection
