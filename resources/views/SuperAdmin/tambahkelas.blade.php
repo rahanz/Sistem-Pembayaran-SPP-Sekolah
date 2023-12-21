@@ -70,16 +70,18 @@
                                         <tr>
                                             <td>{{ $kelas->ruang_kelas }}</td>
                                             <td>{{ $kelas->wali_kelas }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ $kelas->jumlah_siswa }}</td>
+                                            <td>{{ $kelas->jumlah_laki_laki }}</td>
+                                            <td>{{ $kelas->jumlah_perempuan }}</td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <a href="#" class="btn btn-warning btn-sm mr-3" data-toggle="modal"
                                                         data-target="#editKelasModal{{ $kelas->id }}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form>
+                                                    <form action="{{ Route('DeleteKelas', $kelas->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"
                                                             onclick="return confirm('Are you sure?')"><i
                                                                 class="fas fa-trash"></i></button>

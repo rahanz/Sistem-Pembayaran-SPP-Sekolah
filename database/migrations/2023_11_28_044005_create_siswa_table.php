@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->string('nis')->unique();
             $table->string('nama');
+            $table->string('no_hp')->unique();
             $table->string('jenis_kelamin')->default(null);
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id')->on('kelas');
