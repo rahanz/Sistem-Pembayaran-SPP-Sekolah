@@ -10,10 +10,10 @@ Route::get('/login', [HomeController::class, 'login']);
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::middleware('siswa')->group(function () {
-  Route::get('/user_setting', [HomeController::class, 'user_profile'])->name('HalamanUserSetting');
-  Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
-  Route::post('/bayar', [PembayaranController::class, 'proses_pembayaran'])->name('proses-checkout');
-  // Route::get('/checkout_pembayaran', [HomeController::class, 'halaman_checkout'])->name('CheckoutSpp');
+    Route::get('/user_setting', [HomeController::class, 'user_profile'])->name('HalamanUserSetting');
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/bayar', [PembayaranController::class, 'proses'])->name('proses-checkout');
+    Route::get('/checkout', [PembayaranController::class, 'tampilan_checkout'])->name('tampilan_checkout');
 });
 
 Route::get('/', [HomeController::class, 'dashboard'])->name('HalamanDashboard');

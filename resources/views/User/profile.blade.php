@@ -69,11 +69,13 @@
                                                     <h3 class="card-title font-weight-bold"
                                                         style="font-size: 1.5rem; margin-bottom: 20px;">Rp
                                                         {{ number_format($biaya_spp->harga_spp, 2, ',', '.') }}</h3>
-                                                    <form action="{{ Route('proses-checkout') }}" method="POST">
-                                                        <div class="d-flex justify-content-start">
-                                                            <button id="pay-button" class="btn btn-primary">Bayar</button>
-                                                        </div>
-                                                    </form>
+                                                    <div class="d-flex justify-content-start">
+                                                        <a href="{{ route('tampilan_checkout') }}">
+                                                            <button class="btn btn-primary">
+                                                                Bayar
+                                                            </button>
+                                                        </a>
+                                                    </div>
                                                 @else
                                                     <p class="card-text">Belum ada biaya SPP yang ditetapkan.</p>
                                                 @endif

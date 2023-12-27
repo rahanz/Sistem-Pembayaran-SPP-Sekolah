@@ -12,25 +12,30 @@
                         <div class="card-header">
                             <h3 class="card-title">Checkout</h3>
                         </div>
-                        <form action="{{ route('proses_checkout') }}" method="POST">
+
+                        <pre><div id="result-json">Tes<br></div></pre>
+                        <form action="{{ route('proses-checkout') }}" method="POST">
                             @csrf
                             <input type="hidden" name="snap_token" value="{{ $pembayaran->snap_token }}">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="nama_siswa">Nama : {{ $data_siswa->nama }}</label><br>
-                                    <label for="tahun_ajaran_aktif_saat_membayar">Tahun Ajaran : {{ $tahunAjaranAktif->tahun_ajaran }} - {{ $tahunAjaranAktif->semester }}</label><br>
-                                    <label for="waktu_pembayaran">Tanggal Pembayaran : {{ $tanggalPembayaran }}</label><br>
+                                    <input type="text" hidden name="user_id" value="{{ Auth::user()->id }}">
+                                    <label for="nama_siswa">Nama : {{ $data_siswa }}</label><br>
+                                    <label for="tahun_ajaran_aktif_saat_membayar">Tahun Ajaran :
+                                        {{ $dataTahunAjaranAktif->tahun_ajaran }}</label><br>
+                                    <label for="waktu_pembayaran">Tanggal Pembayaran :
+                                        {{ \Carbon\Carbon::now()->toDateString() }}</label><br>
                                     <label for="masukkan_bulan_yang_ingin_dibayar">Tagihan Bulan Spp : </label>
                                     <select class="form-control" name="bulan_yang_dibayarkan">
                                         <option value="">-- Pilih Tagihan Bulan Spp --</option>
-                                        @foreach ($bulanTagihanOption as $bulanOpton)
-                                            <option value="{{ $bulanOption}}">{{ $bulanOption }}</option>
+                                        @foreach ($bulanTagihanOptions as $bulanOption)
+                                            <option value="{{ $bulanOption }}">{{ $bulanOption }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-dark">Bayar Sekarang</button>
+                                <button type="submit" class="btn btn-dark" id="pay-button">Bayar Sekarang</button>
                             </div>
                         </form>
                     </div>
@@ -39,3 +44,29 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+    <script type="text/javascript">
+        document.getElementById('pay-button').onclick = function() {
+            // SnapToken acquired from previous step
+            snap.pay('<?= $snapToken ?>', {
+                // Optional
+                onSuccess: function(result) {
+                    /* You may add your own js here, this is just example */
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onPending: function(result) {
+                    /* You may add your own js here, this is just example */
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onError: function(result) {
+                    /* You may add your own js here, this is just example */
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                }
+            });
+        };
+    </script>
+@endpush
