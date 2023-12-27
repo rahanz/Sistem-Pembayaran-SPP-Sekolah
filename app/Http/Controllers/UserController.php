@@ -25,6 +25,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Login failed. Check your username and password.');
         }
     }
+    
     public function logout(Request $request)
     {
         Auth::logout();

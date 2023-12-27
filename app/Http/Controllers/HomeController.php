@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\pembayaran;
 use App\Models\siswa;
+use App\Models\spp;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +18,19 @@ class HomeController extends Controller
         return view('User.dashboard');
     }
 
-    public function user_profile()
+    public function user_profile(pembayaran $pembayaran)
     {
         $user = Auth::user();
         $siswa = $user->siswa;
-        return view('User.profile', compact('user', 'siswa'));
+        $biaya_spp = spp::latest()->first();
+
+        $data_pembayaran = pembayaran::all();
+        return view('User.profile', compact('user', 'siswa', 'biaya_spp', 'data_pembayaran'));
+    }
+
+    public function halaman_checkout()
+    {
+        return view('User.checkout');
     }
 
     public function dashboard()
@@ -37,6 +47,7 @@ class HomeController extends Controller
     {
         return view('Akun.register');
     }
+
     // halaman data siswa
     public function data_siswa(Request $request)
     {
@@ -58,6 +69,7 @@ class HomeController extends Controller
     {
         return view('SuperAdmin.kelas');
     }
+
     // halaman tambah kelas
     public function tambah_kelas()
     {
@@ -68,5 +80,14 @@ class HomeController extends Controller
             $kelas->jumlah_perempuan = Siswa::where('kelas_id', $kelas->id)->where('jenis_kelamin', 'Perempuan')->count();
         }
         return view('SuperAdmin.tambahkelas', compact('data_kelas'));
+    }
+
+    // halaman pembayaran spp admin
+    public function pembayaran_spp_admin()
+    {
+        $biaya_spp = spp::latest()->first();
+        $tahun_ajaran_aktif = TahunAjaran::latest()->first();
+        $data_tahun_ajaran = TahunAjaran::all();
+        return view('SuperAdmin.pembayaran', compact('biaya_spp', 'tahun_ajaran_aktif', 'data_tahun_ajaran'));
     }
 }

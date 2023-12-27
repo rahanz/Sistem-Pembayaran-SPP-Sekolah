@@ -5,7 +5,7 @@
 
 @section('TambahSiswa')
     <section class="content">
-        <div class="card card-warning">
+        <div class="card card-navy">
             <div class="card-header">
                 <h3 class="card-title">Form Penambahan Data Siswa</h3>
             </div>
@@ -57,9 +57,9 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-dark">Submit</button>
                 <!-- Tombol untuk memunculkan modal -->
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadModal">Upload
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#uploadModal">Upload
                     CSV/Excel</button>
             </div>
             </form>

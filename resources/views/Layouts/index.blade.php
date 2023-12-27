@@ -34,7 +34,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-navy navbar-dark">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -179,7 +179,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-light-navy elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
@@ -266,7 +266,8 @@
                         <!-- Fitur -->
                         <li class="nav-header">FITUR</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ Route('PembayaranSPP') }}"
+                                class="nav-link {{ Route::is('PembayaranSPP') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>Pembayaran SPP</p>
                             </a>
@@ -320,6 +321,7 @@
             @yield('DataSiswa')
             @yield('TambahSiswa')
             @yield('TambahKelas')
+            @yield('Pembayaran')
             <!-- End of Main content -->
         </div>
 

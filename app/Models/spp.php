@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class spp extends Model
 {
     use HasFactory;
-    protected $table = 'spp'; // nama tabel di database
+    protected $table = 'spp';
+    protected $fillable =
+    [
+        'harga_spp'
+    ];
 
-    protected $fillable = ['biaya']; // kolom yang bisa diisi
+    public function data_pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'product_id');
+    }
 }

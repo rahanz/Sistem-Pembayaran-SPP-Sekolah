@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card card-primary card-outline">
+                    <div class="card card-navy card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle"
@@ -38,7 +38,7 @@
                                     <p class="float-right">{{ $siswa->kelas->ruang_kelas }}</p>
                                 </li>
                             </ul>
-                            <a href="" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                            <a href="" class="btn btn-dark btn-block"><b>Edit Profile</b></a>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                     <div class="card">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills">
-                                <li class="nav-item"><a class="nav-link active" href="#activity"
-                                        data-toggle="tab">SPP</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">SPP</a>
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
@@ -58,29 +58,95 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity">
-                                    <h3>SPP</h3>
+                                    <div class="col-md-12">
+                                        <div class="card bg-light mb-3 shadow">
+                                            <div class="card-header text-white bg-navy">Biaya SPP Yang Harus di Bayarkan
+                                                Siswa</div>
+                                            <div class="card-body d-flex flex-column">
+                                                @if ($biaya_spp)
+                                                    <p class="card-text" style="font-size: 1.5rem; margin-bottom:">Biaya Spp
+                                                        yang harus dibayarkan</p>
+                                                    <h3 class="card-title font-weight-bold"
+                                                        style="font-size: 1.5rem; margin-bottom: 20px;">Rp
+                                                        {{ number_format($biaya_spp->harga_spp, 2, ',', '.') }}</h3>
+                                                    <form action="{{ Route('proses-checkout') }}" method="POST">
+                                                        <div class="d-flex justify-content-start">
+                                                            <button id="pay-button" class="btn btn-primary">Bayar</button>
+                                                        </div>
+                                                    </form>
+                                                @else
+                                                    <p class="card-text">Belum ada biaya SPP yang ditetapkan.</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- /.tab-pane -->
+                                <!-- Tabel Pembuatan Pembayaran SPP -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card card-navy">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Tabel Data Pembayaran SPP</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Bulan</th>
+                                                            <th>Tahun Ajaran</th>
+                                                            <th>Nominal</th>
+                                                            <th>Status</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($data_pembayaran as $item)
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <div class="btn-group" role="group">
+                                                                        <!-- Tombol Edit -->
+                                                                        <button type="button"
+                                                                            class="btn btn-warning btn-sm mr-3"
+                                                                            data-toggle="modal" data-target="#editModal">
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </button>
+                                                                        <form action="" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger btn-sm"
+                                                                                onclick="return confirm('Are you sure?')">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Timeline --}}
                                 <div class="tab-pane" id="timeline">
-                                    <!-- The timeline -->
                                     <div class="timeline timeline-inverse">
-                                        <!-- timeline time label -->
                                         <div class="time-label">
                                             <span class="bg-danger">
                                                 10 Feb. 2014
                                             </span>
                                         </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
                                         <div>
                                             <i class="fas fa-envelope bg-primary"></i>
-
                                             <div class="timeline-item">
                                                 <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
                                                 <h3 class="timeline-header"><a href="#">Support Team</a> sent you an
                                                     email</h3>
-
                                                 <div class="timeline-body">
                                                     Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
                                                     weebly ning heekya handango imeem plugg dopplr jibjab, movity

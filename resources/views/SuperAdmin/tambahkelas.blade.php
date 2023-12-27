@@ -11,7 +11,7 @@
 
 @section('TambahKelas')
     <section class="content">
-        <div class="card card-primary">
+        <div class="card card-navy">
             <div class="card-header">
                 <h3 class="card-title">Tambah Ruang Kelas</h3>
             </div>
@@ -38,7 +38,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-dark">Submit</button>
                 </div>
             </form>
         </div>
@@ -48,7 +48,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-navy">
                         <div class="card-header">
                             <h3 class="card-title">Data Ruang Kelas</h3>
                         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\kelas;
 use App\Models\siswa;
+use App\Models\spp;
+use App\Models\TahunAjaran;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -171,5 +173,94 @@ class InputController extends Controller
         } else {
             return redirect()->route('DataSiswa')->with('error', 'Data siswa tidak ditemukan.');
         }
+    }
+
+    // halaman spp
+    public function input_spp(Request $request)
+    {
+        $request->validate([
+            'biaya_spp' => 'required|numeric',
+        ]);
+
+        spp::create([
+            'harga_spp' => $request->input('biaya_spp'),
+        ]);
+
+        return redirect()->route('PembayaranSPP')->with('success', 'Biaya SPP berhasil disimpan.');
+    }
+
+    public function update_spp(Request $request)
+    {
+        $request->validate([
+            'biaya_spp' => 'required|numeric',
+        ]);
+
+        $biaya_spp = spp::latest()->first();
+        $biaya_spp->harga_spp = $request->input('biaya_spp');
+        $biaya_spp->save();
+
+        return redirect()->route('PembayaranSPP')->with('success', 'Biaya SPP berhasil diperbarui.');
+    }
+
+    public function input_tahun_ajaran(Request $request)
+    {
+        $request->validate([
+            'tahun_ajaran_form' => 'required',
+            'semester_form' => 'required'
+        ]);
+
+        TahunAjaran::create([
+            'tahun_ajaran' => $request->input('tahun_ajaran_form'),
+            'semester' => $request->input('semester_form')
+        ]);
+
+        return back()->with('success', 'Data tahun ajaran berhasil ditambahkan');
+    }
+
+    public function edit_tahun_ajaran(Request $request, $id)
+    {
+        $request->validate([
+            'tahun_ajaran_form' => 'required',
+            'semester_form' => 'required'
+        ]);
+
+        $tahun_ajaran = TahunAjaran::find($id);
+        if ($tahun_ajaran) {
+            $tahun_ajaran->tahun_ajaran = $request->input('tahun_ajaran_form');
+            $tahun_ajaran->semester = $request->input('semester_form');
+            $tahun_ajaran->save();
+
+            return back()->with('success', 'Data tahun ajaran berhasil diupdate.');
+        } else {
+            return back()->with('error', 'Data tahun ajaran tidak ditemukan.');
+        }
+    }
+
+    public function delete_tahun_ajaran($id)
+    {
+        $tahun_ajaran = TahunAjaran::find($id);
+        if ($tahun_ajaran) {
+            $tahun_ajaran->delete();
+            return back()->with('success', 'Data tahun ajaran berhasil dihapus.');
+        } else {
+            return back()->with('error', 'Data tahun ajaran tidak ditemukan.');
+        }
+    }
+
+    public function tahun_ajaran_aktif(Request $request)
+    {
+        $request->validate([
+            'tahun_ajaran_aktif' => 'required|exists:tahun_ajaran,id',
+        ]);
+    
+        // set semua tahun ajaran dan semester menjadi tidak aktif
+        TahunAjaran::where('is_active', true)->update(['is_active' => false]);
+    
+        // set tahun ajaran dan semester yang dipilih menjadi aktif
+        $tahun_ajaran = TahunAjaran::find($request->tahun_ajaran_aktif);
+        $tahun_ajaran->is_active = true;
+        $tahun_ajaran->save();
+
+        return back()->with('success', 'Data tahun ajaran aktif berhasil diupdate');
     }
 }
