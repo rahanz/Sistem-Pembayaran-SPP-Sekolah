@@ -12,9 +12,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Checkout</h3>
                         </div>
-
-                        <pre><div id="result-json">Tes<br></div></pre>
-                        <form action="{{ route('proses-checkout') }}" method="POST">
+                        <form id="pay-form" action="{{ route('proses-checkout') }}" method="POST">
                             @csrf
                             <input type="hidden" name="snap_token" value="{{ $pembayaran->snap_token }}">
                             <div class="card-body">
@@ -35,9 +33,13 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-dark" id="pay-button">Bayar Sekarang</button>
+                                <button type="button" class="btn btn-dark" id="pay-button">Bayar Sekarang</button>
                             </div>
                         </form>
+                        <div hidden class="card-body">
+                            <h5>Hasil JSON:</h5>
+                            <pre id="result-json"></pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,25 +48,30 @@
 @endsection
 
 @push('script')
+    <!-- Tambahkan script Snap.js dan konfigurasi client key -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+
     <script type="text/javascript">
         document.getElementById('pay-button').onclick = function() {
-            // SnapToken acquired from previous step
+            // SnapToken acquired from the previous step
             snap.pay('<?= $snapToken ?>', {
                 // Optional
                 onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // Penanganan ketika pembayaran berhasil
+                    document.getElementById('result-json').innerHTML = JSON.stringify(result, null, 2);
+
+                    // Setelah pembayaran berhasil, submit form secara otomatis
+                    document.getElementById('pay-form').submit();
                 },
                 // Optional
                 onPending: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // Penanganan ketika pembayaran dalam status pending
+                    document.getElementById('result-json').innerHTML = JSON.stringify(result, null, 2);
                 },
                 // Optional
                 onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // Penanganan ketika terjadi kesalahan pada pembayaran
+                    document.getElementById('result-json').innerHTML = JSON.stringify(result, null, 2);
                 }
             });
         };

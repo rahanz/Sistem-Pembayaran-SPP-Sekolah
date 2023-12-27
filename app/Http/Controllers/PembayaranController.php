@@ -52,12 +52,30 @@ class PembayaranController extends Controller
         $pembayaran->snap_token = $snapToken;
         $pembayaran->save();
 
-        return redirect()->route('tampilan_checkout', $pembayaran->id)->with('success', 'Silahkan lanjutkan ke proses pembayaran');
+        return redirect()->route('HalamanUserSetting')->with('success', 'Silahkan lanjutkan ke proses pembayaran');
     }
 
 
     public function tampilan_checkout(Request $request, Pembayaran $pembayaran)
     {
+        $hargaSpp = Spp::latest()->value('harga_spp');
+
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => rand(),
+                'gross_amount' => $hargaSpp,
+            ],
+            'customer_details' => [
+                'first_name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ],
+        ];
+
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $dataTahunAjaranAktif = TahunAjaran::where('is_active', true)->first();
         $data_siswa = auth()->user()->name;
@@ -66,7 +84,7 @@ class PembayaranController extends Controller
 
         $bulanTagihanOptions = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-        return view('User.checkout', compact('pembayaran', 'product', 'bulanTagihanOptions', 'data_siswa', 'dataTahunAjaranAktif'));
+        return view('User.checkout', compact('pembayaran', 'product', 'bulanTagihanOptions', 'data_siswa', 'dataTahunAjaranAktif', 'params', 'snapToken'));
     }
 
 }
