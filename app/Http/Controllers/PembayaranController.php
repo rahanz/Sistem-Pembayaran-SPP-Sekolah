@@ -58,6 +58,7 @@ class PembayaranController extends Controller
 
     public function tampilan_checkout(Request $request, Pembayaran $pembayaran)
     {
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
         $dataTahunAjaranAktif = TahunAjaran::where('is_active', true)->first();
         $data_siswa = auth()->user()->name;
         $products = config('products');
