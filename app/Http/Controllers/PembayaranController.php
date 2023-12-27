@@ -63,29 +63,6 @@ class PembayaranController extends Controller
         $products = config('products');
         $product = collect($products)->firstWhere('id', $pembayaran->product_id);
 
-        $hargaSpp = Spp::latest()->value('harga_spp');
-        $user_id = $request->input('user_id');
-
-        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
-
-        $params = [
-            'transaction_details' => [
-                'order_id' => rand(),
-                'gross_amount' => $hargaSpp,
-            ],
-            'customer_details' => [
-                'first_name' => Auth::user()->name,
-                'email' => Auth::user()->email,
-            ],
-        ];
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $pembayaran->snap_token = $snapToken;
-        $pembayaran->save();
-
         $bulanTagihanOptions = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
         return view('User.checkout', compact('pembayaran', 'product', 'bulanTagihanOptions', 'data_siswa', 'dataTahunAjaranAktif'));
